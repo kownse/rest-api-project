@@ -16,10 +16,10 @@ from schemas import UserSchema, UserRegisterSchema
 blp = Blueprint("users", __name__, description="Operations on users")
 
 def send_simple_message(to, subject, body):
-    domain = os.getenv('MAILGUN_DOMAIN', 'sandbox2300fb912b5548369c86d173d52974c3.mailgun.org')
+    domain = os.getenv('MAILGUN_DOMAIN')
     return requests.post(
   		f"https://api.mailgun.net/v3/{domain}/messages",
-  		auth=("api", os.getenv('MAILGUN_API_KEY', 'f181fd16760bf4ccdd061e9c3f17219b-623424ea-4eff06ac')),
+  		auth=("api", os.getenv('MAILGUN_API_KEY')),
   		data={"from": "Yunfei Duan <postmaster@sandbox2300fb912b5548369c86d173d52974c3.mailgun.org>",
 			"to": [to],
   			"subject": subject,
