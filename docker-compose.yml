@@ -1,8 +1,32 @@
-version: '3'
 services:
   web:
     build: .
     ports:
-      - "5005:5000"
+      - "5005:80"
     volumes:
       - .:/app
+    depends_on:
+      - db
+    env_file:
+      - ./.env
+    networks:
+      - djangonetwork
+    links:
+      - db:db
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRESS_PASSWORD=password
+      - POSTGRES_DB=myapp
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - djangonetwork
+volumes:
+  postgres_data:
+networks:
+  djangonetwork:
+    driver: bridge
+
