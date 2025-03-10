@@ -30,11 +30,7 @@ class UserRegister(MethodView):
     @blp.arguments(UserRegisterSchema)
     @blp.response(201, UserSchema)
     def post(self, user_data):
-        if UserModel.query.filter_by(
-            or_(
-                username=user_data['username'],
-                email=user_data['email']
-            )
+        if UserModel.query.filter_by(username=user_data['username']
         ).first():
             abort(409, message="User already exists")
 
