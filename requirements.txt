@@ -9,3 +9,5 @@ passlib
 gunicorn
 psycopg2
 requests
+rq
+redis
